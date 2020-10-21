@@ -41,6 +41,8 @@ print(args)
 input_path <- args$input_path
 export_path <- args$export_path
 
+#input_path <- "../livia_computacao/dados_pre_processados"
+
 alunos <- readr::read_csv(paste0(input_path, "/alunos_computacao.csv"))
 historico <- readr::read_csv(paste0(input_path, "/historico_computacao.csv"))
 
@@ -60,13 +62,14 @@ generate_ids <- function(x) {
   return(ids)
 }
 
-historico_alunos <- join_alunos_historico(alunos, historico)
-
-id <- generate_ids(nrow(historico_alunos))
+id <- generate_ids(nrow(alunos))
 ids <- data.frame(id)
 
-historico_alunos_raiox <- dplyr::bind_cols(ids, historico_alunos) %>% 
-  dplyr::select(-cpf,
-                -matricula)
+alunos_raiox <- dplyr::bind_cols(ids, alunos) %>% 
+  dplyr::select(-cpf)
 
-readr::write_csv(historico_alunos_raiox, paste0(export_path, "/historico_alunos.csv"))
+historico_alunos_raiox <- join_alunos_historico(alunos_raiox, historico) %>% 
+  dplyr::select(-matricula)
+
+readr::write_csv(alunos_raiox, paste0(export_path, "/alunos_raiox.csv"))
+readr::write_csv(historico_alunos_raiox, paste0(export_path, "/historico_alunos_raiox.csv"))
