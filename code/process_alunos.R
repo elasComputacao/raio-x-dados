@@ -71,5 +71,8 @@ alunos_raiox <- dplyr::bind_cols(ids, alunos) %>%
 historico_alunos_raiox <- join_alunos_historico(alunos_raiox, historico) %>% 
   dplyr::select(-matricula)
 
+alunos_raiox <- alunos_raiox %>% 
+  dplyr::select(-matricula)
+
 readr::write_csv(alunos_raiox, paste0(export_path, "/alunos_raiox.csv"))
 readr::write_csv(historico_alunos_raiox, paste0(export_path, "/historico_alunos_raiox.csv"))
