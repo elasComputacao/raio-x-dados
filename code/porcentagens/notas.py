@@ -10,11 +10,10 @@ mulheres = mulheres.to_frame('media_mulheres').reset_index()
 geral = geral.groupby(['periodo_ingresso'])['apv_media_geral'].mean().round(2)
 geral = geral.to_frame('media_geral').reset_index()
 
-
 nota_geral = geral.join(mulheres['media_mulheres'])
-nota_geral['periodo_ingresso'].astype(str)
-nota_geral = pd.wide_to_long(nota_geral, stubnames='media', i=['periodo_ingresso'], j='classe',
-                    sep='_', suffix='\w+').reset_index()
-nota_geral.head()
-#nota_geral.to_csv('notas.csv') 
-#files.download('notas.csv')
+
+media_total_mulheres = nota_geral['media_mulheres'].sum() / nota_geral['media_mulheres'].count()
+print('A média total das mulheres é', media_total_mulheres.round(2))
+
+media_total = nota_geral['media_geral'].sum() / nota_geral['media_geral'].count()
+print('A média total de todos os alunos é', media_total.round(2))
