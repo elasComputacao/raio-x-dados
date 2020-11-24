@@ -15,6 +15,6 @@ nota_geral = geral.join(mulheres['media_mulheres'])
 nota_geral['periodo_ingresso'].astype(str)
 nota_geral = pd.wide_to_long(nota_geral, stubnames='media', i=['periodo_ingresso'], j='classe',
                     sep='_', suffix='\w+').reset_index()
-nota_geral.head()
-#nota_geral.to_csv('notas.csv') 
-#files.download('notas.csv')
+
+nota_geral.to_csv('notas.csv') 
+files.download('notas.csv')
