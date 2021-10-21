@@ -71,3 +71,8 @@ def get_df_taxas(geral):
     df_taxas['insucesso'] = round((df_taxas.loc[:,'reprovado':'reprovado_falta'].sum(axis=1))/ df_taxas['soma_situacoes'],4)
 
     return df_taxas
+
+# utilizando as funcoes do script
+geral = pre_processamento()
+df_taxas = get_df_taxas(geral)
+# df_taxas.to_csv('taxas.csv')
